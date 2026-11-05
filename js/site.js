@@ -640,6 +640,7 @@
     li.appendChild(link); sheetList.appendChild(li);
   });
   function openSheet() {
+    document.documentElement.classList.add("menu-seen");
     sheetReturn = document.activeElement;
     sheet.hidden = false; document.body.style.overflow = "hidden";
     sheetBtn.setAttribute("aria-expanded", "true");

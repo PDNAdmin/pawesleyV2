@@ -56,6 +56,22 @@
         ],
         "createdAt": "2026-11-05T10:25:06.352Z",
         "reason": "assistant: radial gradients draw the individual candle lights and flame"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "css/site.css"
+        ],
+        "createdAt": "2026-11-05T17:54:05.650Z"
+      },
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-05T17:54:08.835Z"
       }
     ]
   }

@@ -196,14 +196,29 @@ html.text-lg { font-size: 115%; }
   .tabs__menu-text { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.15; }
   .tabs__menu-kicker { font-size: .8125rem; font-weight: 700; color: var(--gold-ink); }
   .tabs__menu-name { font-size: 1.0625rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  /* a slow gold light passes over the name so it reads as something to tap */
+  /* the button asks to be tapped: a gold light sweeps the name, a gold ring breathes around it, the icon nudges.
+     After the first tap the ring and nudge rest; the sweep carries on, slower. */
   .tabs__menu-name {
-    background: linear-gradient(100deg, var(--ink) 0 28%, var(--gold-ink) 40%, #c8902c 50%, var(--gold-ink) 60%, var(--ink) 72% 100%) 100% 0 / 280% 100%;
+    background: linear-gradient(100deg, var(--ink) 0 22%, #B8741A 36%, #E9A93A 46%, #F6CB6A 50%, #E9A93A 54%, #B8741A 64%, var(--ink) 78% 100%) 100% 0 / 300% 100%;
     -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    animation: menu-shine 4.5s ease-in-out infinite;
+    animation: menu-shine 3s ease-in-out infinite;
   }
-  @keyframes menu-shine { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0 0; } }
-  @media (prefers-reduced-motion: reduce) { .tabs__menu-name { animation: none; -webkit-text-fill-color: currentColor; background: none; } }
+  @keyframes menu-shine { 0% { background-position: 100% 0; } 50%, 100% { background-position: 0 0; } }
+  .tabs__menu { animation: menu-ring 3s ease-out infinite; }
+  @keyframes menu-ring {
+    0%   { border-color: var(--gold); box-shadow: 0 0 0 0 rgb(222 153 46 / .55); }
+    45%  { border-color: var(--gold); box-shadow: 0 0 0 9px rgb(222 153 46 / 0); }
+    100% { border-color: var(--rule-paper); box-shadow: 0 0 0 0 rgb(222 153 46 / 0); }
+  }
+  .tabs__menu-icon { animation: menu-nudge 3s ease-in-out infinite; }
+  @keyframes menu-nudge { 0%, 52%, 100% { transform: none; } 58% { transform: scale(1.12) rotate(-6deg); } 66% { transform: scale(1.12) rotate(5deg); } 74% { transform: none; } }
+  .menu-seen .tabs__menu, .menu-seen .tabs__menu-icon { animation: none; }
+  .menu-seen .tabs__menu-name { animation-duration: 6s; }
+  @media (prefers-reduced-motion: reduce) {
+    .tabs__menu, .tabs__menu-icon { animation: none; }
+    .tabs__menu { border-color: var(--gold); }
+    .tabs__menu-name { animation: none; -webkit-text-fill-color: currentColor; background: none; }
+  }
   .tabs__menu-icon { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--cinema); color: var(--gold-hi); }
   .tabs__menu-icon svg { width: 22px; height: 22px; }
   .tabs__sound { margin-left: 0; padding: 0; width: 48px; justify-content: center; }
