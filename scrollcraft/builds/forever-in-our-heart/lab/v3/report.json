@@ -1,0 +1,341 @@
+{
+  "doc": {
+    "height": 67683,
+    "vh": 844,
+    "acts": [
+      "pin",
+      "pan"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 21000,
+      "pct": 31,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40689
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 1,
+      "y": 21081,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40608
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 2,
+      "y": 21162,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40527
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 3,
+      "y": 21243,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40446
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 4,
+      "y": 21324,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40365
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 5,
+      "y": 21405,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        40284
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 6,
+      "y": 61757,
+      "pct": 92,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -187
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -40344,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 7,
+      "y": 62405,
+      "pct": 93,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -1968
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -40992,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 8,
+      "y": 63053,
+      "pct": 94,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3749
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -41640,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 9,
+      "y": 63701,
+      "pct": 95,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -5530
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -42288,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 10,
+      "y": 64349,
+      "pct": 96,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -7311
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -42936,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 11,
+      "y": 64997,
+      "pct": 97,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9092
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -43584,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    },
+    {
+      "i": 12,
+      "y": 66839,
+      "pct": 100,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9279
+      ],
+      "wipes": [],
+      "act": "-",
+      "stages": [
+        -45426,
+        -1774
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FBF3E2"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)",
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "failed": [
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/jesus-lives.mp3",
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/jerusalem-on-high.mp3",
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/hymn-261.mp3",
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/sleep-on-beloved.mp3",
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/in-christ-alone.mp3",
+    "net::ERR_ABORTED http://localhost:8744/assets/audio/photo-speak.mp3"
+  ]
+}

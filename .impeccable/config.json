@@ -1,0 +1,62 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-04T21:24:01.066Z",
+        "reason": "assistant: full-bleed hero/hush/photos/chapter/thanks sections hold their text inside an inner .wrap with gutter padding; flags are on the outer full-bleed section"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-04T21:24:02.434Z",
+        "reason": "user brief: the printed programme's cream paper is the client's pinned palette"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "css/site.css"
+        ],
+        "createdAt": "2026-11-05T06:21:25.909Z",
+        "reason": "assistant: the glow is the candle field and candle flame (literal candlelight the user asked to be surprised by), not decoration"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "css/site.css"
+        ],
+        "createdAt": "2026-11-05T06:21:27.763Z",
+        "reason": "assistant: radial gradients draw the individual candle lights and flame"
+      },
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-05T10:25:05.112Z",
+        "reason": "assistant: the glow is the candle field and candle flame (literal candlelight), not decoration"
+      },
+      {
+        "rule": "radial-halo",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-05T10:25:06.352Z",
+        "reason": "assistant: radial gradients draw the individual candle lights and flame"
+      }
+    ]
+  }
+}

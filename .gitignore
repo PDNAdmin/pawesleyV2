@@ -1,0 +1,5 @@
+# PDFs: the printed programme is 31 MB, too large to push
+*.pdf
+
+# dependencies (film/node_modules alone is about 800 MB)
+node_modules/

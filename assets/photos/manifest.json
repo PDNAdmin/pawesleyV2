@@ -1,0 +1,226 @@
+[
+  {
+    "n": 1,
+    "file": "img-01.jpg",
+    "w": 686,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 2,
+    "file": "img-02.jpg",
+    "w": 719,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 3,
+    "file": "img-03.jpg",
+    "w": 1080,
+    "h": 573,
+    "orientation": "landscape"
+  },
+  {
+    "n": 4,
+    "file": "img-04.jpg",
+    "w": 719,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 5,
+    "file": "img-05.jpg",
+    "w": 1066,
+    "h": 1600,
+    "orientation": "portrait"
+  },
+  {
+    "n": 6,
+    "file": "img-06.jpg",
+    "w": 1000,
+    "h": 667,
+    "orientation": "landscape"
+  },
+  {
+    "n": 7,
+    "file": "img-07.jpg",
+    "w": 713,
+    "h": 667,
+    "orientation": "landscape"
+  },
+  {
+    "n": 8,
+    "file": "img-08.jpg",
+    "w": 1080,
+    "h": 922,
+    "orientation": "landscape"
+  },
+  {
+    "n": 9,
+    "file": "img-09.jpg",
+    "w": 1080,
+    "h": 770,
+    "orientation": "landscape"
+  },
+  {
+    "n": 10,
+    "file": "img-10.jpg",
+    "w": 770,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 11,
+    "file": "img-11.jpg",
+    "w": 810,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 12,
+    "file": "img-12.jpg",
+    "w": 1080,
+    "h": 770,
+    "orientation": "landscape"
+  },
+  {
+    "n": 13,
+    "file": "img-13.jpg",
+    "w": 810,
+    "h": 704,
+    "orientation": "landscape"
+  },
+  {
+    "n": 14,
+    "file": "img-14.jpg",
+    "w": 1080,
+    "h": 696,
+    "orientation": "landscape"
+  },
+  {
+    "n": 15,
+    "file": "img-15.jpg",
+    "w": 719,
+    "h": 1045,
+    "orientation": "portrait"
+  },
+  {
+    "n": 16,
+    "file": "img-16.jpg",
+    "w": 770,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 17,
+    "file": "img-17.jpg",
+    "w": 1080,
+    "h": 770,
+    "orientation": "landscape"
+  },
+  {
+    "n": 18,
+    "file": "img-18.jpg",
+    "w": 770,
+    "h": 1080,
+    "orientation": "portrait"
+  },
+  {
+    "n": 19,
+    "file": "img-19.jpg",
+    "w": 1920,
+    "h": 1277,
+    "orientation": "landscape"
+  },
+  {
+    "n": 20,
+    "file": "img-20.jpg",
+    "w": 1600,
+    "h": 1142,
+    "orientation": "landscape"
+  },
+  {
+    "n": 21,
+    "file": "img-21.jpg",
+    "w": 1600,
+    "h": 1142,
+    "orientation": "landscape"
+  },
+  {
+    "n": 22,
+    "file": "img-22.jpg",
+    "w": 1000,
+    "h": 667,
+    "orientation": "landscape"
+  },
+  {
+    "n": 23,
+    "file": "img-23.jpg",
+    "w": 1600,
+    "h": 1142,
+    "orientation": "landscape"
+  },
+  {
+    "n": 24,
+    "file": "img-24.jpg",
+    "w": 860,
+    "h": 605,
+    "orientation": "landscape"
+  },
+  {
+    "n": 25,
+    "file": "img-25.jpg",
+    "w": 1080,
+    "h": 766,
+    "orientation": "landscape"
+  },
+  {
+    "n": 26,
+    "file": "img-26.jpg",
+    "w": 1664,
+    "h": 1316,
+    "orientation": "landscape"
+  },
+  {
+    "n": 27,
+    "file": "img-27.jpg",
+    "w": 1368,
+    "h": 812,
+    "orientation": "landscape"
+  },
+  {
+    "n": 28,
+    "file": "img-28.jpg",
+    "w": 1223,
+    "h": 837,
+    "orientation": "landscape"
+  },
+  {
+    "n": 29,
+    "file": "img-29.jpg",
+    "w": 1200,
+    "h": 1600,
+    "orientation": "portrait"
+  },
+  {
+    "n": 30,
+    "file": "img-30.jpg",
+    "w": 1050,
+    "h": 750,
+    "orientation": "landscape"
+  },
+  {
+    "n": 31,
+    "file": "img-31.jpg",
+    "w": 1080,
+    "h": 670,
+    "orientation": "landscape"
+  },
+  {
+    "n": 32,
+    "file": "img-32.jpg",
+    "w": 1600,
+    "h": 1200,
+    "orientation": "landscape"
+  }
+]

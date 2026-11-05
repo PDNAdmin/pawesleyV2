@@ -1,0 +1,2053 @@
+{
+  "doc": {
+    "height": 65787,
+    "vh": 844,
+    "acts": [
+      "pin",
+      "flow",
+      "flow",
+      "flow",
+      "pin",
+      "flow",
+      "flow",
+      "pan",
+      "flow",
+      "pin"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 15,
+      "pct": 0,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19998,
+        59971,
+        64759
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 1,
+      "y": 161,
+      "pct": 0,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19852,
+        59825,
+        64613
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 2,
+      "y": 307,
+      "pct": 0,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19706,
+        59679,
+        64467
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 3,
+      "y": 453,
+      "pct": 1,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19560,
+        59533,
+        64321
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 4,
+      "y": 599,
+      "pct": 1,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 0.37
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19414,
+        59387,
+        64175
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 5,
+      "y": 745,
+      "pct": 1,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        0,
+        19268,
+        59241,
+        64029
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 6,
+      "y": 799,
+      "pct": 1,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -39,
+        19214,
+        59187,
+        63975
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 7,
+      "y": 1174,
+      "pct": 2,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -414,
+        18839,
+        58812,
+        63600
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 8,
+      "y": 1549,
+      "pct": 2,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -789,
+        18464,
+        58437,
+        63225
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 9,
+      "y": 1915,
+      "pct": 3,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -1155,
+        18098,
+        58071,
+        62859
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 10,
+      "y": 1924,
+      "pct": 3,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -1164,
+        18089,
+        58062,
+        62850
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 11,
+      "y": 2299,
+      "pct": 4,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -1539,
+        17714,
+        57687,
+        62475
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 12,
+      "y": 2365,
+      "pct": 4,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -1605,
+        17648,
+        57621,
+        62409
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 13,
+      "y": 2674,
+      "pct": 4,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -1914,
+        17339,
+        57312,
+        62100
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 14,
+      "y": 2814,
+      "pct": 4,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -2054,
+        17199,
+        57172,
+        61960
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 15,
+      "y": 3263,
+      "pct": 5,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -2503,
+        16750,
+        56723,
+        61511
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 16,
+      "y": 3696,
+      "pct": 6,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -2936,
+        16317,
+        56290,
+        61078
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 17,
+      "y": 3712,
+      "pct": 6,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -2952,
+        16301,
+        56274,
+        61062
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 18,
+      "y": 4161,
+      "pct": 6,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -3401,
+        15852,
+        55825,
+        60613
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 19,
+      "y": 6893,
+      "pct": 11,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -6133,
+        13120,
+        53093,
+        57881
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 20,
+      "y": 10090,
+      "pct": 16,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -9330,
+        9923,
+        49896,
+        54684
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 21,
+      "y": 13287,
+      "pct": 20,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -12527,
+        6726,
+        46699,
+        51487
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 22,
+      "y": 16484,
+      "pct": 25,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -15724,
+        3529,
+        43502,
+        48290
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 23,
+      "y": 19680,
+      "pct": 30,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "BiOGRAPHY",
+          "dir": "light-on-dark",
+          "worst": 3.04,
+          "mean": 3.59
+        }
+      ],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -18920,
+        333,
+        40306,
+        45094
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 24,
+      "y": 20019,
+      "pct": 31,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "BiOGRAPHY",
+          "dir": "light-on-dark",
+          "worst": 3.04,
+          "mean": 3.58
+        }
+      ],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19259,
+        0,
+        39967,
+        44755
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 25,
+      "y": 20076,
+      "pct": 31,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "BiOGRAPHY",
+          "dir": "light-on-dark",
+          "worst": 3.04,
+          "mean": 3.58
+        }
+      ],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 1
+        },
+        {
+          "t": "OFLate",
+          "o": 0.54
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19316,
+        0,
+        39910,
+        44698
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 26,
+      "y": 20132,
+      "pct": 31,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "BiOGRAPHY",
+          "dir": "light-on-dark",
+          "worst": 3.04,
+          "mean": 3.58
+        },
+        {
+          "t": "OFLate",
+          "dir": "dark-on-light",
+          "worst": 2.06,
+          "mean": 2.28
+        },
+        {
+          "t": "Pa. Wesley Olajide Ojo Aiyegboka",
+          "dir": "light-on-dark",
+          "worst": 7.28,
+          "mean": 8.3
+        }
+      ],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 1
+        },
+        {
+          "t": "OFLate",
+          "o": 1
+        },
+        {
+          "t": "Pa. Wesley Olajide Ojo Aiyegboka",
+          "o": 0.99
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19372,
+        0,
+        39854,
+        44642
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 27,
+      "y": 20189,
+      "pct": 31,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "BiOGRAPHY",
+          "dir": "light-on-dark",
+          "worst": 3.04,
+          "mean": 3.58
+        },
+        {
+          "t": "OFLate",
+          "dir": "dark-on-light",
+          "worst": 2.06,
+          "mean": 2.28
+        },
+        {
+          "t": "Pa. Wesley Olajide Ojo Aiyegboka",
+          "dir": "light-on-dark",
+          "worst": 7.28,
+          "mean": 8.29
+        }
+      ],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 1
+        },
+        {
+          "t": "OFLate",
+          "o": 1
+        },
+        {
+          "t": "Pa. Wesley Olajide Ojo Aiyegboka",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19429,
+        0,
+        39797,
+        44585
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 28,
+      "y": 20246,
+      "pct": 31,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "BiOGRAPHY",
+          "o": 0.47
+        },
+        {
+          "t": "OFLate",
+          "o": 0.54
+        },
+        {
+          "t": "Pa. Wesley Olajide Ojo Aiyegboka",
+          "o": 0.66
+        }
+      ],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19486,
+        0,
+        39740,
+        44528
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 29,
+      "y": 20302,
+      "pct": 31,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19542,
+        0,
+        39684,
+        44472
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 30,
+      "y": 20500,
+      "pct": 32,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -19740,
+        -191,
+        39486,
+        44274
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 31,
+      "y": 22339,
+      "pct": 34,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -21579,
+        -2030,
+        37647,
+        42435
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 32,
+      "y": 24178,
+      "pct": 37,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -23418,
+        -3869,
+        35808,
+        40596
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 33,
+      "y": 26017,
+      "pct": 40,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -25257,
+        -5708,
+        33969,
+        38757
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 34,
+      "y": 27855,
+      "pct": 43,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -27095,
+        -7546,
+        32131,
+        36919
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 35,
+      "y": 29660,
+      "pct": 46,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -28900,
+        -9351,
+        30326,
+        35114
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 36,
+      "y": 29694,
+      "pct": 46,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -28934,
+        -9385,
+        30292,
+        35080
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 37,
+      "y": 35602,
+      "pct": 55,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -34842,
+        -15293,
+        24384,
+        29172
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 38,
+      "y": 41543,
+      "pct": 64,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -40783,
+        -21234,
+        18443,
+        23231
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 39,
+      "y": 47485,
+      "pct": 73,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -46725,
+        -27176,
+        12501,
+        17289
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 40,
+      "y": 53426,
+      "pct": 82,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -52666,
+        -33117,
+        6560,
+        11348
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 41,
+      "y": 59368,
+      "pct": 91,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        0
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -58608,
+        -39059,
+        618,
+        5406
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 42,
+      "y": 60054,
+      "pct": 92,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -194
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -59294,
+        -39745,
+        0,
+        4720
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 43,
+      "y": 60702,
+      "pct": 93,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -2051
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -59942,
+        -40393,
+        0,
+        4072
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 44,
+      "y": 61350,
+      "pct": 94,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -3908
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -60590,
+        -41041,
+        0,
+        3424
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 45,
+      "y": 61998,
+      "pct": 95,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -5765
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -61238,
+        -41689,
+        0,
+        2776
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 46,
+      "y": 62646,
+      "pct": 96,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -7622
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -61886,
+        -42337,
+        0,
+        2128
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 47,
+      "y": 63295,
+      "pct": 97,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9482
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -62535,
+        -42986,
+        0,
+        1479
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 48,
+      "y": 63390,
+      "pct": 98,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -62630,
+        -43081,
+        -28,
+        1384
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 49,
+      "y": 63662,
+      "pct": 98,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pan",
+      "stages": [
+        -62902,
+        -43353,
+        -300,
+        1112
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 50,
+      "y": 63933,
+      "pct": 98,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -63173,
+        -43624,
+        -571,
+        841
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 51,
+      "y": 64204,
+      "pct": 99,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.11
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 6.96,
+          "mean": 8.13
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "flow",
+      "stages": [
+        -63444,
+        -43895,
+        -842,
+        570
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 52,
+      "y": 64475,
+      "pct": 99,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.11
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.03,
+          "mean": 8.53
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -63715,
+        -44166,
+        -1113,
+        299
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 53,
+      "y": 64746,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.73,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -63986,
+        -44437,
+        -1384,
+        28
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 54,
+      "y": 64778,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64018,
+        -44469,
+        -1416,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 55,
+      "y": 64810,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64050,
+        -44501,
+        -1448,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 56,
+      "y": 64842,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64082,
+        -44533,
+        -1480,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 57,
+      "y": 64875,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64115,
+        -44566,
+        -1513,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 58,
+      "y": 64907,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64147,
+        -44598,
+        -1545,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 59,
+      "y": 64940,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64180,
+        -44631,
+        -1578,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    },
+    {
+      "i": 60,
+      "y": 64943,
+      "pct": 100,
+      "settled": true,
+      "contrast": [
+        {
+          "t": "Appreciation",
+          "dir": "light-on-dark",
+          "worst": 8.73,
+          "mean": 10.12
+        },
+        {
+          "t": "With hearts full of gratitude, we, the f",
+          "dir": "light-on-dark",
+          "worst": 7.06,
+          "mean": 8.67
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th N",
+          "dir": "light-on-dark",
+          "worst": 5.7,
+          "mean": 6.06
+        }
+      ],
+      "cues": [
+        {
+          "t": "Appreciation",
+          "o": 1
+        },
+        {
+          "t": "With hearts full of gratitude, we, the family ",
+          "o": 1
+        },
+        {
+          "t": "Burial and Funeral Service, Friday 6th Novembe",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [
+        -9674
+      ],
+      "wipes": [],
+      "act": "pin",
+      "stages": [
+        -64183,
+        -44634,
+        -1581,
+        0
+      ],
+      "segs": [],
+      "custom": [],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": "#FCF0D2"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (File not found)"
+  ],
+  "failed": []
+}
