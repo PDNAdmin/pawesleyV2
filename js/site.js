@@ -241,6 +241,30 @@
   pToggle.addEventListener("click", function () { if (audio.paused) audio.play(); else audio.pause(); });
   $("#player-close").addEventListener("click", function () { audio.pause(); audio.removeAttribute("src"); audio.load(); current = null; player.hidden = true; syncButtons(); });
 
+  /* ------------------------------------------------ the hymn on arrival: "Sleep on, Beloved", looping softly
+     Browsers only allow sound after a tap, so the opening asks once; the switch at the top turns it on and off. */
+  var ambient = new Audio(AUDIO["sleep-on-beloved"].file), soundBtn = $("#sound-toggle"), soundWanted = false;
+  ambient.loop = true; ambient.preload = "metadata"; ambient.volume = 0.55;
+  function syncSound() {
+    var on = !ambient.paused;
+    soundBtn.setAttribute("aria-pressed", String(on));
+    soundBtn.setAttribute("aria-label", on ? "Turn the hymn off" : "Play the hymn");
+    $(".tabs__sound-label", soundBtn).textContent = on ? "Sound on" : "Sound off";
+  }
+  function soundOn() {
+    soundWanted = true;
+    if (!audio.paused) audio.pause();
+    var p = ambient.play(); if (p && p.catch) p.catch(function () { soundWanted = false; syncSound(); });
+    if ("mediaSession" in navigator && window.MediaMetadata) navigator.mediaSession.metadata = new MediaMetadata({ title: "Sleep on, Beloved", artist: "Forever In Our Heart", album: "Pa. Wesley Olajide Ojo Aiyegboka" });
+  }
+  function soundOff() { soundWanted = false; ambient.pause(); }
+  ambient.addEventListener("play", syncSound);
+  ambient.addEventListener("pause", syncSound);
+  soundBtn.addEventListener("click", function () { if (ambient.paused) soundOn(); else soundOff(); });
+  // another hymn or the film takes over; the arrival hymn steps aside
+  audio.addEventListener("play", function () { if (!ambient.paused) soundOff(); });
+  syncSound();
+
   $$("[data-track]").forEach(function (holder) {
     var k = holder.dataset.track, t = AUDIO[k];
     var b = el("button", "track__btn"); b.type = "button"; b.disabled = true;
@@ -261,14 +285,14 @@
   /* ------------------------------------------------ 17 to 18: the darkroom */
   var ERAS = [
     { src: "assets/print/bio-portrait.webp", cut: true, alt: "Pa. Wesley Olajide Ojo Aiyegboka" },
-    { src: "assets/photos/full/img-01.jpg", alt: "A young Wesley Olajide Ojo Aiyegboka in a suit" },
-    { src: "assets/photos/full/img-09.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka seated beside a woman in glasses" },
-    { src: "assets/photos/full/img-13.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka seated in purple traditional attire" },
-    { src: "assets/photos/full/img-30.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka with two young people" },
-    { src: "assets/photos/full/img-02.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka standing in patterned traditional attire" },
-    { src: "assets/photos/full/img-05.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka walking in white agbada" },
-    { src: "assets/photos/full/img-22.jpg", alt: "Pa. Wesley Olajide Ojo Aiyegboka beside a woman, both in yellow" },
-    { src: "assets/photos/full/img-08.jpg", alt: "Portrait of Pa. Wesley Olajide Ojo Aiyegboka smiling" }
+    { src: "assets/photos/full/img-01.webp", alt: "A young Wesley Olajide Ojo Aiyegboka in a suit" },
+    { src: "assets/photos/full/img-09.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka seated beside a woman in glasses" },
+    { src: "assets/photos/full/img-13.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka seated in purple traditional attire" },
+    { src: "assets/photos/full/img-30.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka with two young people" },
+    { src: "assets/photos/full/img-02.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka standing in patterned traditional attire" },
+    { src: "assets/photos/full/img-05.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka walking in white agbada" },
+    { src: "assets/photos/full/img-22.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka beside a woman, both in yellow" },
+    { src: "assets/photos/full/img-08.webp", alt: "Portrait of Pa. Wesley Olajide Ojo Aiyegboka smiling" }
   ];
   var tray = $("#dr-tray"), yearEl = $("#dr-year");
   var paras = $$("#dr-text p");
@@ -470,8 +494,9 @@
     }).observe(marquee);
     lanes.forEach(function (L) {
       var row = L.row;
-      row.addEventListener("mouseenter", function () { L.hold = true; });
-      row.addEventListener("mouseleave", function () { L.hold = false; });
+      // a resting mouse pauses its row; touch screens send fake mouse events after a tap, so those are ignored
+      row.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") L.hold = true; });
+      row.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") L.hold = false; });
       row.addEventListener("focusin", function (e) {
         L.hold = true;
         var t = e.target.closest(".ph"); if (!t) return;
@@ -556,11 +581,14 @@
   $("#film-direct").href = filmSrc;
   // the film is silent: saying so lets strict browsers (Safari, iPhone) play it without blocking
   video.muted = true; video.defaultMuted = true; video.playsInline = true;
-  video.src = filmSrc;
+  // the film file only starts loading as you come near it, so it never slows the opening
+  new IntersectionObserver(function (es, o) {
+    if (es[0].isIntersecting) { if (!video.getAttribute("src")) video.src = filmSrc; o.disconnect(); }
+  }, { rootMargin: "1200px 0px" }).observe(filmFrame);
   function showControls() { filmFrame.classList.add("is-playing"); video.controls = true; filmLabel.textContent = "Play the film"; }
   function startFilm() {
     filmLabel.textContent = "Starting the film\u2026";
-    if (video.error) { video.src = filmSrc; video.load(); }
+    if (!video.getAttribute("src") || video.error) { video.src = filmSrc; video.load(); }
     var p;
     try { p = video.play(); } catch (e) { showControls(); return; }
     // if a browser refuses, its own controls take over, which every phone knows how to use
@@ -573,9 +601,55 @@
     $("#film").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   });
   video.addEventListener("playing", showControls);
-  video.addEventListener("play", function () { if (!audio.paused) audio.pause(); });
+  video.addEventListener("play", function () { if (!audio.paused) audio.pause(); if (!ambient.paused) soundOff(); });
   video.addEventListener("error", showControls);
   video.addEventListener("ended", function () { filmFrame.classList.remove("is-playing"); video.controls = false; video.currentTime = 0; });
+
+  /* ------------------------------------------------ phones: one big button names where you are and opens every section */
+  var HINTS = ["Date, church and officiants", "The running order", "Hymns, readings and prayers", "His life story",
+               "From family and friends", "Photo Speak", "The memorial film", "The family's thanks"];
+  var sheet = $("#sections"), sheetList = $("#sections-list"), sheetBtn = $("#sections-btn"), sheetReturn = null;
+  $$("#tab-list a").forEach(function (a, k) {
+    var li = el("li"), link = el("a", "sheet__link");
+    link.href = a.getAttribute("href");
+    link.innerHTML = '<span class="sheet__num">' + (k + 1) + '</span><span class="sheet__words"><span class="sheet__name"></span><span class="sheet__hint"></span></span>';
+    $(".sheet__name", link).textContent = a.textContent;
+    $(".sheet__hint", link).textContent = HINTS[k] || "";
+    li.appendChild(link); sheetList.appendChild(li);
+  });
+  function openSheet() {
+    sheetReturn = document.activeElement;
+    sheet.hidden = false; document.body.style.overflow = "hidden";
+    sheetBtn.setAttribute("aria-expanded", "true");
+    var cur = $(".sheet__link[aria-current]", sheet) || $(".sheet__link", sheet);
+    requestAnimationFrame(function () { sheet.classList.add("is-open"); var panel = $(".sheet__panel", sheet); panel.scrollTop = Math.max(0, cur.offsetTop - panel.clientHeight / 2); cur.focus({ preventScroll: true }); });
+  }
+  function closeSheet(keepFocus) {
+    sheet.classList.remove("is-open"); sheetBtn.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = "";
+    setTimeout(function () { sheet.hidden = true; }, reduce ? 0 : 260);
+    if (!keepFocus && sheetReturn) sheetReturn.focus({ preventScroll: true });
+  }
+  sheetBtn.addEventListener("click", openSheet);
+  $("#sections-close").addEventListener("click", function () { closeSheet(); });
+  sheet.addEventListener("click", function (e) {
+    if (e.target === sheet) return closeSheet();
+    if (e.target.closest("a")) closeSheet(true);
+  });
+  sheet.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") return closeSheet();
+    if (e.key !== "Tab") return;
+    var f = $$("a, button", sheet), first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+  var sheetLinks = $$(".sheet__link", sheet), curName = $("#sections-current"), curKicker = $("#sections-kicker");
+  function nameSection(cur) {
+    sheetLinks.forEach(function (a, k) { if (k === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+    curKicker.textContent = cur >= 0 ? "Section " + (cur + 1) + " of " + sheetLinks.length : "Sections";
+    curName.textContent = cur >= 0 ? sheetLinks[cur].querySelector(".sheet__name").textContent : "Choose a section";
+  }
+  nameSection(-1);
 
   /* ------------------------------------------------ section tabs follow the reading line */
   var tabLinks = $$("#tab-list a"), tabList = $("#tab-list");
@@ -586,6 +660,7 @@
     chapters.forEach(function (c) { if (c.getBoundingClientRect().top <= line) cur = +c.dataset.tab; });
     if (cur !== lastTab) {
       tabLinks.forEach(function (a, k) { if (k === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+      nameSection(cur);
       if (cur >= 0) {
         var a = tabLinks[cur];
         tabList.scrollTo({ left: a.offsetLeft - tabList.clientWidth / 2 + a.offsetWidth / 2, behavior: reduce ? "auto" : "smooth" });
@@ -639,6 +714,42 @@
     arrive.forEach(function (n) { io.observe(n); });
     document.documentElement.classList.add("arrivals");
   }
+
+  /* ------------------------------------------------ the opening
+     Holds while the type, the opening picture and the page arrive (at least long enough for the cross to rise,
+     never more than five seconds), then asks once whether to enter with the hymn. */
+  (function () {
+    var loader = $("#loader"), bar = $("#loader-bar"), root = document.documentElement;
+    var t0 = performance.now(), MIN = reduce ? 400 : 1900, MAX = 5000, done = false;
+    // the opening needs the type, the first picture and the start of the showreel; the rest streams in afterwards
+    var reelReady = new Promise(function (res) { if (reel.readyState >= 2) res(); else { reel.addEventListener("loadeddata", res, { once: true }); setTimeout(res, 3500); } });
+    var fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    var poster = new Promise(function (res) { var i = new Image(); i.onload = i.onerror = res; i.src = reel.poster; });
+    var parts = [reelReady, fonts, poster], got = 0;
+    parts.forEach(function (pr) { pr.then(function () { got++; bar.style.transform = "scaleX(" + (0.2 + 0.8 * got / parts.length).toFixed(2) + ")"; }); });
+    bar.style.transform = "scaleX(.12)";
+    function ready() {
+      if (done) return; done = true;
+      bar.style.transform = "scaleX(1)";
+      setTimeout(function () {
+        $("#loader-wait").hidden = true;
+        $("#loader-enter").hidden = false;
+        $("#enter-sound").focus({ preventScroll: true });
+      }, Math.max(0, MIN - (performance.now() - t0)));
+    }
+    Promise.all(parts).then(ready);
+    setTimeout(ready, MAX);
+    function enter(withSound) {
+      if (withSound) soundOn();
+      loader.classList.add("is-leaving");
+      root.classList.remove("is-loading");
+      setTimeout(function () { loader.remove(); }, reduce ? 0 : 700);
+      // warm the photographs in the background now that the opening is done
+      setTimeout(function () { GALLERY.forEach(function (g) { var i = new Image(); i.decoding = "async"; i.src = g.thumb; }); }, 1500);
+    }
+    $("#enter-sound").addEventListener("click", function () { enter(true); });
+    $("#enter-quiet").addEventListener("click", function () { enter(false); });
+  })();
 
   ScrollCraft.mount(document.body);
   requestAnimationFrame(frame);

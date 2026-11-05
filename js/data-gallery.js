@@ -8,8 +8,8 @@ const GALLERY = Array.from({ length: GALLERY_COUNT }, (_, i) => {
   const id = String(n).padStart(2, "0");
   return {
     id: n,
-    full: `assets/photos/full/img-${id}.jpg`,
-    thumb: `assets/photos/thumb/img-${id}.jpg`,
+    full: `assets/photos/full/img-${id}.webp`,
+    thumb: `assets/photos/thumb/img-${id}.webp`,
     alt: `Photograph ${n} of Pa. Wesley Olajide Ojo Aiyegboka from the family album`
   };
 });
