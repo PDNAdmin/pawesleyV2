@@ -425,30 +425,93 @@
 
   window.Memorial = { openReader: openReader, toast: toast, buildCard: buildCard, filterCards: filterCards };
 
-  /* ------------------------------------------------ 41 to 44: photo speak */
+  /* ------------------------------------------------ 41 to 44: photo speak, two slow rows drifting in opposite directions
+     Calm by default, a little livelier when you scroll past, still under your hand, and draggable. */
   var PORTRAIT = { 1: 1, 2: 1, 4: 1, 5: 1, 10: 1, 11: 1, 15: 1, 16: 1, 18: 1, 29: 1 };
-  var rail = $("#photo-rail"), queue = GALLERY.slice();
-  function tile(ph) {
-    var b = el("button", "ph"); b.type = "button";
+  var marquee = $("#photo-marquee"), rows = $$(".marquee__row", marquee), pauseBtn = $("#photos-pause");
+  var half = Math.ceil(GALLERY.length / 2);
+  function tile(ph, copy) {
+    var b = el("button", "ph" + (PORTRAIT[ph.id] ? " ph--tall" : "")); b.type = "button";
     b.dataset.index = String(ph.id - 1);
-    b.setAttribute("aria-label", "Open photograph " + ph.id + " of " + GALLERY.length);
-    b.innerHTML = '<img src="' + ph.thumb + '" alt="' + ph.alt + '" loading="' + (ph.id <= 8 ? "eager" : "lazy") + '" decoding="async">';
+    if (copy) { b.tabIndex = -1; b.setAttribute("aria-hidden", "true"); }
+    else b.setAttribute("aria-label", "Open photograph " + ph.id + " of " + GALLERY.length);
+    b.innerHTML = '<img src="' + ph.thumb + '" alt="' + (copy ? "" : ph.alt) + '" loading="lazy" decoding="async" draggable="false">';
     return b;
   }
-  while (queue.length) {
-    var ph = queue.shift(), col;
-    if (PORTRAIT[ph.id] || !queue.length || PORTRAIT[queue[0].id]) { col = el("div", "pcol pcol--tall"); col.appendChild(tile(ph)); }
-    else { col = el("div", "pcol pcol--pair"); col.appendChild(tile(ph)); col.appendChild(tile(queue.shift())); }
-    rail.appendChild(col);
-  }
-  rail.appendChild(el("p", "photos__end", "Forever in our Heart."));
-  var photosAct = $("#photos");
-  rail.addEventListener("focusin", function (e) {
-    var t = e.target.closest(".ph"); if (!t || reduce) return;
-    var travel = rail.scrollWidth - innerWidth; if (travel <= 0) return;
-    var p = clamp01((t.offsetLeft + t.offsetWidth / 2 - innerWidth / 2) / travel);
-    scrollTo({ top: photosAct.getBoundingClientRect().top + scrollY + p * (photosAct.offsetHeight - innerHeight), behavior: "instant" });
+  var lanes = rows.map(function (row, r) {
+    var track = $(".marquee__track", row), set = GALLERY.slice(r ? half : 0, r ? GALLERY.length : half);
+    set.forEach(function (ph) { track.appendChild(tile(ph, false)); });
+    if (!reduce) set.forEach(function (ph) { track.appendChild(tile(ph, true)); });
+    return { row: row, track: track, dir: +row.dataset.dir, x: 0, v: 0, hold: false, drag: null, width: 0, suppress: false };
   });
+  function measure() { lanes.forEach(function (L) { L.width = L.track.scrollWidth / 2; }); }
+  if (!reduce) {
+    measure(); addEventListener("resize", measure);
+    $$("img", marquee).forEach(function (i) { i.addEventListener("load", measure, { once: true }); });
+    var BASE = innerWidth < 700 ? 18 : 26;          // pixels a second: slow enough to take in each face
+    var paused = false, onScreen = false, last = 0, boost = 0, lastY = scrollY, raf = 0;
+    addEventListener("scroll", function () { boost = Math.min(boost + Math.abs(scrollY - lastY) * 0.9, 260); lastY = scrollY; }, { passive: true });
+    function wrap(L) { if (!L.width) return; while (L.x <= -L.width) L.x += L.width; while (L.x > 0) L.x -= L.width; }
+    function frame(t) {
+      var dt = Math.min((t - (last || t)) / 1000, 0.05); last = t;
+      boost *= Math.pow(0.04, dt);                  // a scroll gives the rows a gentle push that fades in about a second
+      lanes.forEach(function (L) {
+        if (L.drag && L.drag.moved) return;
+        var target = (paused || L.hold) ? 0 : (BASE + boost) * L.dir;
+        L.v += (target - L.v) * Math.min(1, dt * 3);  // ease in and out of every stop
+        L.x += L.v * dt; wrap(L);
+        L.track.style.transform = "translate3d(" + L.x.toFixed(2) + "px,0,0)";
+      });
+      raf = onScreen ? requestAnimationFrame(frame) : 0;
+    }
+    new IntersectionObserver(function (es) {
+      onScreen = es[0].isIntersecting; last = 0;
+      if (onScreen && !raf) raf = requestAnimationFrame(frame);
+    }).observe(marquee);
+    lanes.forEach(function (L) {
+      var row = L.row;
+      row.addEventListener("mouseenter", function () { L.hold = true; });
+      row.addEventListener("mouseleave", function () { L.hold = false; });
+      row.addEventListener("focusin", function (e) {
+        L.hold = true;
+        var t = e.target.closest(".ph"); if (!t) return;
+        L.x = Math.max(-L.width, Math.min(0, row.clientWidth / 2 - t.offsetLeft - t.offsetWidth / 2));
+      });
+      row.addEventListener("focusout", function () { L.hold = false; });
+      // drag or swipe sideways to move a row by hand; a short tap still opens the photo
+      row.addEventListener("pointerdown", function (e) {
+        if (e.button) return;
+        L.drag = { x0: e.clientX, x: L.x, t: e.timeStamp, last: e.clientX, moved: false, id: e.pointerId };
+      });
+      row.addEventListener("pointermove", function (e) {
+        var d = L.drag; if (!d || d.id !== e.pointerId) return;
+        var dx = e.clientX - d.x0;
+        if (!d.moved && Math.abs(dx) > 8) { d.moved = true; try { row.setPointerCapture(e.pointerId); } catch (_) {} row.classList.add("is-dragging"); }
+        if (!d.moved) return;
+        var dt = Math.max(e.timeStamp - d.t, 1) / 1000;
+        L.v = (e.clientX - d.last) / dt; d.last = e.clientX; d.t = e.timeStamp;
+        var before = L.x; L.x = d.x + dx; wrap(L); d.x += L.x - (d.x + dx);
+        L.track.style.transform = "translate3d(" + L.x.toFixed(2) + "px,0,0)";
+      });
+      function endDrag() {
+        var d = L.drag; if (!d) return;
+        L.drag = null; row.classList.remove("is-dragging");
+        L.v = Math.max(-900, Math.min(900, L.v));    // let go and it glides, then settles back to its own pace
+        if (d.moved) { L.suppress = true; setTimeout(function () { L.suppress = false; }, 60); }
+      }
+      row.addEventListener("pointerup", endDrag);
+      row.addEventListener("pointercancel", endDrag);
+      row.addEventListener("click", function (e) { if (L.suppress) { e.stopPropagation(); e.preventDefault(); } }, true);
+    });
+    pauseBtn.addEventListener("click", function () {
+      paused = !paused;
+      pauseBtn.setAttribute("aria-pressed", String(paused));
+      pauseBtn.textContent = paused ? "Play the photos" : "Pause the photos";
+    });
+  } else {
+    marquee.classList.add("is-still"); pauseBtn.hidden = true;
+  }
+  var rail = marquee;
 
   /* lightbox: arrows, keyboard and swipe */
   var lb = $("#lightbox"), lbImg = $("#lightbox-img"), lbCap = $("#lightbox-cap"), lbIndex = 0, lbReturn = null;
@@ -484,26 +547,35 @@
     tx = null;
   }, { passive: true });
 
-  /* ------------------------------------------------ the film: the right shape for the screen, one clear play button */
-  var video = $("#film-video"), filmFrame = $("#film-frame"), filmPlay = $("#film-play");
+  /* ------------------------------------------------ the film: the right shape for the screen, one clear play button
+     The source is set up front so the tap only has to press play. The poster button stays until frames are moving. */
+  var video = $("#film-video"), filmFrame = $("#film-frame"), filmPlay = $("#film-play"), filmLabel = $("strong", filmPlay);
   var tall = matchMedia("(max-aspect-ratio: 4/5)").matches;
+  var filmSrc = tall ? video.dataset.srcMobile : video.dataset.src;
   if (tall) { filmFrame.classList.add("is-tall"); video.poster = video.dataset.posterMobile; }
+  $("#film-direct").href = filmSrc;
   // the film is silent: saying so lets strict browsers (Safari, iPhone) play it without blocking
-  video.muted = true; video.defaultMuted = true; video.setAttribute("muted", ""); video.playsInline = true;
+  video.muted = true; video.defaultMuted = true; video.playsInline = true;
+  video.src = filmSrc;
+  function showControls() { filmFrame.classList.add("is-playing"); video.controls = true; filmLabel.textContent = "Play the film"; }
   function startFilm() {
-    if (!video.getAttribute("src")) { video.src = tall ? video.dataset.srcMobile : video.dataset.src; video.load(); }
-    video.controls = true;
-    filmFrame.classList.add("is-playing");
-    // must run inside the tap itself; if a browser still refuses, its own play button is showing
-    var p = video.play(); if (p && p.catch) p.catch(function () { video.controls = true; });
+    filmLabel.textContent = "Starting the film\u2026";
+    if (video.error) { video.src = filmSrc; video.load(); }
+    var p;
+    try { p = video.play(); } catch (e) { showControls(); return; }
+    // if a browser refuses, its own controls take over, which every phone knows how to use
+    if (p && p.catch) p.catch(showControls);
+    setTimeout(function () { if (video.paused) showControls(); }, 4000);
   }
   filmPlay.addEventListener("click", startFilm);
   $("[data-open-film]").addEventListener("click", function () {
     startFilm();
     $("#film").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   });
+  video.addEventListener("playing", showControls);
   video.addEventListener("play", function () { if (!audio.paused) audio.pause(); });
-  video.addEventListener("ended", function () { filmFrame.classList.remove("is-playing"); video.controls = false; });
+  video.addEventListener("error", showControls);
+  video.addEventListener("ended", function () { filmFrame.classList.remove("is-playing"); video.controls = false; video.currentTime = 0; });
 
   /* ------------------------------------------------ section tabs follow the reading line */
   var tabLinks = $$("#tab-list a"), tabList = $("#tab-list");

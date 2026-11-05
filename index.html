@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Great+Vibes&family=Anton&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/vendor/scrollcraft.css">
-<link rel="stylesheet" href="css/site.css">
+<link rel="stylesheet" href="css/vendor/scrollcraft.css?v=20261105">
+<link rel="stylesheet" href="css/site.css?v=20261105">
 </head>
 <body>
 <a class="skip-link" href="#order">Skip to the order of service</a>
@@ -190,16 +190,22 @@
   </section>
 
   <!-- ═════════ 41 to 44 · PHOTO SPEAK ═════════ -->
-  <section class="photos cinema" id="photos" data-tab="5" data-sc-act="pan" data-sc-span="5">
-    <div data-sc-stage class="photos__stage">
-      <div class="photos__rail" id="photo-rail" data-sc-pan="0.04">
-        <div class="photos__lead">
-          <h2 class="display photos__title">Photo Speak</h2>
-          <p>Thirty-two photographs from his life. Tap any one to see it full screen.</p>
-          <div class="track track--dark" data-track="photo-speak"></div>
-        </div>
+  <section class="photos cinema" id="photos" data-tab="5">
+    <div class="wrap photos__head">
+      <div>
+        <h2 class="display photos__title">Photo Speak</h2>
+        <p>Thirty-two photographs from his life. Tap any one to see it full screen.</p>
+      </div>
+      <div class="photos__tools">
+        <div class="track track--dark" data-track="photo-speak"></div>
+        <button class="photos__pause" type="button" id="photos-pause" aria-pressed="false">Pause the photos</button>
       </div>
     </div>
+    <div class="marquee" id="photo-marquee">
+      <div class="marquee__row" data-dir="1"><div class="marquee__track"></div></div>
+      <div class="marquee__row" data-dir="-1"><div class="marquee__track"></div></div>
+    </div>
+    <p class="wrap photos__end">Forever in our Heart.</p>
   </section>
 
   <!-- ═════════ THE FILM ═════════ -->
@@ -208,7 +214,7 @@
       <h2 class="display chapter__title">The memorial film</h2>
       <p class="film__lede">A short silent film of his life, made from the family's photographs and the words of this programme.</p>
       <div class="film__frame" id="film-frame">
-        <video id="film-video" playsinline preload="none" poster="assets/film/showreel-poster.jpg"
+        <video id="film-video" playsinline muted preload="metadata" poster="assets/film/showreel-poster.jpg"
                data-src="assets/film/memorial.mp4" data-src-mobile="assets/film/memorial-vertical.mp4"
                data-poster-mobile="assets/film/showreel-vertical-poster.jpg"></video>
         <button class="film__play" type="button" id="film-play">
@@ -216,7 +222,7 @@
           <span class="film__play-text"><strong>Play the film</strong><span>1 minute, silent</span></span>
         </button>
       </div>
-      <p class="film__share">Save it to share on WhatsApp: <a href="assets/film/memorial-vertical.mp4" download>phone version</a> or <a href="assets/film/memorial.mp4" download>widescreen version</a>.</p>
+      <p class="film__share">If the film does not start, <a href="assets/film/memorial-vertical.mp4" id="film-direct" target="_blank" rel="noopener">open it in your phone’s player</a>. Save it to share on WhatsApp: <a href="assets/film/memorial-vertical.mp4" download>phone version</a> or <a href="assets/film/memorial.mp4" download>widescreen version</a>.</p>
     </div>
   </section>
 
@@ -323,12 +329,12 @@
   </figure>
 </div>
 
-<script src="js/data-service.js"></script>
-<script src="js/data-tributes.js"></script>
-<script src="js/data-gallery.js"></script>
-<script src="js/data-audio.js"></script>
-<script src="js/vendor/scrollcraft.js"></script>
-<script src="js/site.js"></script>
-<script type="module" src="js/community.js"></script>
+<script src="js/data-service.js?v=20261105"></script>
+<script src="js/data-tributes.js?v=20261105"></script>
+<script src="js/data-gallery.js?v=20261105"></script>
+<script src="js/data-audio.js?v=20261105"></script>
+<script src="js/vendor/scrollcraft.js?v=20261105"></script>
+<script src="js/site.js?v=20261105"></script>
+<script type="module" src="js/community.js?v=20261105"></script>
 </body>
 </html>
