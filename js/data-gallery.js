@@ -3,8 +3,8 @@
 
 const GALLERY_COUNT = 32;
 
-const GALLERY = Array.from({ length: GALLERY_COUNT }, (_, i) => {
-  const n = i + 1;
+// photograph 8 was withdrawn at the family's request
+const GALLERY = Array.from({ length: GALLERY_COUNT }, (_, i) => i + 1).filter(n => n !== 8).map(n => {
   const id = String(n).padStart(2, "0");
   return {
     id: n,

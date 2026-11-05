@@ -302,8 +302,7 @@
     { src: "assets/photos/full/img-30.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka with two young people" },
     { src: "assets/photos/full/img-02.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka standing in patterned traditional attire" },
     { src: "assets/photos/full/img-05.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka walking in white agbada" },
-    { src: "assets/photos/full/img-22.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka beside a woman, both in yellow" },
-    { src: "assets/photos/full/img-08.webp", alt: "Portrait of Pa. Wesley Olajide Ojo Aiyegboka smiling" }
+    { src: "assets/photos/full/img-22.webp", alt: "Pa. Wesley Olajide Ojo Aiyegboka beside a woman, both in yellow" }
   ];
   var tray = $("#dr-tray"), yearEl = $("#dr-year");
   var paras = $$("#dr-text p");
@@ -467,9 +466,9 @@
   var half = Math.ceil(GALLERY.length / 2);
   function tile(ph, copy) {
     var b = el("button", "ph" + (PORTRAIT[ph.id] ? " ph--tall" : "")); b.type = "button";
-    b.dataset.index = String(ph.id - 1);
+    b.dataset.index = String(GALLERY.indexOf(ph));
     if (copy) { b.tabIndex = -1; b.setAttribute("aria-hidden", "true"); }
-    else b.setAttribute("aria-label", "Open photograph " + ph.id + " of " + GALLERY.length);
+    else b.setAttribute("aria-label", "Open photograph " + (GALLERY.indexOf(ph) + 1) + " of " + GALLERY.length);
     b.innerHTML = '<img src="' + ph.thumb + '" alt="' + (copy ? "" : ph.alt) + '" loading="lazy" decoding="async" draggable="false">';
     return b;
   }

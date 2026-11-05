@@ -69,7 +69,7 @@ const Title = ({ len }) => {
   const { u, tall } = useLayout();
   return (
     <Fade len={len}>
-      <Photo src="img-08.jpg" len={len} pos="70% 40%" dir={-1} fit="contain" />
+      <Photo src="img-04.jpg" len={len} pos="50% 22%" dir={-1} />
       <Shade />
       <div style={{ position: "absolute", left: (tall ? 72 : 120) * u, bottom: (tall ? 170 : 110) * u, right: 72 * u }}>
         <Line at={14} len={len} style={{ fontFamily: DIDONE, fontWeight: 800, fontSize: (tall ? 120 : 128) * u, lineHeight: 0.95, letterSpacing: "-0.025em", color: C.cream }}>

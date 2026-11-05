@@ -8,7 +8,6 @@ export const REEL = [
   { src: "img-05.jpg", pos: "50% 25%", portrait: 1066 / 1600 },
   { src: "img-26.jpg", pos: "50% 30%" },
   { src: "img-19.jpg", pos: "50% 35%" },
-  { src: "img-08.jpg", pos: "50% 30%", portrait: 1080 / 922 },
   { src: "img-21.jpg", pos: "50% 35%" },
   { src: "img-30.jpg", pos: "50% 30%" },
   { src: "img-32.jpg", pos: "45% 30%" },
