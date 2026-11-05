@@ -472,16 +472,19 @@
   var video = $("#film-video"), filmFrame = $("#film-frame"), filmPlay = $("#film-play");
   var tall = matchMedia("(max-aspect-ratio: 4/5)").matches;
   if (tall) { filmFrame.classList.add("is-tall"); video.poster = video.dataset.posterMobile; }
+  // the film is silent: saying so lets strict browsers (Safari, iPhone) play it without blocking
+  video.muted = true; video.defaultMuted = true; video.setAttribute("muted", ""); video.playsInline = true;
   function startFilm() {
-    if (!video.src) video.src = tall ? video.dataset.srcMobile : video.dataset.src;
+    if (!video.getAttribute("src")) { video.src = tall ? video.dataset.srcMobile : video.dataset.src; video.load(); }
     video.controls = true;
     filmFrame.classList.add("is-playing");
-    var p = video.play(); if (p && p.catch) p.catch(function () {});
+    // must run inside the tap itself; if a browser still refuses, its own play button is showing
+    var p = video.play(); if (p && p.catch) p.catch(function () { video.controls = true; });
   }
   filmPlay.addEventListener("click", startFilm);
   $("[data-open-film]").addEventListener("click", function () {
+    startFilm();
     $("#film").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-    setTimeout(startFilm, reduce ? 50 : 800);
   });
   video.addEventListener("play", function () { if (!audio.paused) audio.pause(); });
   video.addEventListener("ended", function () { filmFrame.classList.remove("is-playing"); video.controls = false; });
