@@ -1,5 +1,6 @@
 (function () {
   "use strict";
+  window.__programme = true;   // tells the opening screen's safety net that the scripts arrived
 
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
