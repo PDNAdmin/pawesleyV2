@@ -1,0 +1,8 @@
+# Kept in the repo but never published: the site is index.html, css/, js/ and assets/.
+film/
+.impeccable/
+DESIGN.md
+PRODUCT.md
+firestore.rules
+.gitignore
+sanity/

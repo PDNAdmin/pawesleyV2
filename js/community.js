@@ -1,9 +1,8 @@
 /* Guest tributes and candles.
-   Firestore when js/firebase-config.js is filled in (same data path as curo.events);
-   otherwise this device's local storage, clearly labelled as such. */
+   Stored in Sanity through the site's own /api functions (the write token stays on the server).
+   When those functions are not reachable (a local preview), this device's storage is used, clearly labelled. */
 
-const FB = "https://www.gstatic.com/firebasejs/10.12.2";
-const ID = window.MEMORIAL_ID || "memorial";
+const ID = "wesley-olajide-ojo-aiyegboka";
 const LIMITS = { name: 80, relation: 40, message: 3000 };
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => Array.from((r || document).querySelectorAll(s));
@@ -19,34 +18,42 @@ function localStore() {
   return {
     mode: "local",
     subscribe(cb) { subs.add(cb); emit(); },
-    async add(t) { const item = { ...t, id: "local-" + Date.now().toString(36), createdAt: Date.now() }; writeLocal(KEY, [item, ...readLocal(KEY, "[]")]); emit(); return item.id; },
+    async add(t) { const item = { ...t, id: "local-" + Date.now().toString(36), createdAt: Date.now() }; writeLocal(KEY, [item, ...readLocal(KEY, "[]")]); emit(); return { id: item.id, pending: false }; },
     async candles() { return readLocal(CANDLE, "0"); },
     async light() { const n = readLocal(CANDLE, "0") + 1; writeLocal(CANDLE, n); return n; }
   };
 }
 
-async function firebaseStore(cfg) {
-  const [{ initializeApp }, fs] = await Promise.all([import(`${FB}/firebase-app.js`), import(`${FB}/firebase-firestore.js`)]);
-  const db = fs.getFirestore(initializeApp(cfg));
-  const tributes = fs.collection(db, "memorials", ID, "tributes");
-  const candles = fs.collection(db, "memorials", ID, "candles");
+function apiStore(first) {
+  const subs = new Set();
+  let items = first.tributes, candleCount = first.candles;
+  const norm = l => l.map(t => ({ ...t, createdAt: Date.parse(t.createdAt) || Date.now() }));
+  const emit = () => subs.forEach(cb => cb(norm(items)));
+  async function refresh() {
+    try { const r = await fetch("/api/tributes", { cache: "no-store" }); if (r.ok) { const d = await r.json(); items = d.tributes; candleCount = d.candles; emit(); } } catch (e) { /* offline: keep what we have */ }
+  }
+  // new tributes from other guests arrive while the page is open
+  setInterval(() => { if (!document.hidden) refresh(); }, 30000);
   return {
-    mode: "firebase",
-    subscribe(cb, onError) {
-      fs.onSnapshot(fs.query(tributes, fs.orderBy("createdAt", "desc"), fs.limit(500)), snap => {
-        cb(snap.docs.map(d => { const x = d.data({ serverTimestamps: "estimate" }); return { id: d.id, ...x, createdAt: x.createdAt ? x.createdAt.toMillis() : Date.now() }; }));
-      }, onError);
+    mode: "sanity",
+    approval: !!first.approval,
+    subscribe(cb) { subs.add(cb); emit(); },
+    async add(t) {
+      const r = await fetch("/api/tributes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(t) });
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw Object.assign(new Error(d.error || "Post failed"), { userMessage: d.error });
+      if (!d.pending) { items = [{ id: d.id, ...t, createdAt: new Date().toISOString() }, ...items]; emit(); refresh(); }
+      return d;
     },
-    async add(t) { return (await fs.addDoc(tributes, { ...t, createdAt: fs.serverTimestamp() })).id; },
-    async candles() { return (await fs.getCountFromServer(candles)).data().count; },
-    async light() { await fs.addDoc(candles, { createdAt: fs.serverTimestamp() }); return (await fs.getCountFromServer(candles)).data().count; }
+    async candles() { return candleCount; },
+    async light() { const r = await fetch("/api/candle", { method: "POST" }); const d = await r.json(); if (!r.ok) throw new Error(d.error); candleCount = d.candles; return d.candles; }
   };
 }
 
-const cfg = window.FIREBASE_CONFIG;
-const storeReady = cfg && cfg.projectId
-  ? firebaseStore(cfg).catch(err => { console.error("Firebase failed, using this device", err); return localStore(); })
-  : Promise.resolve(localStore());
+const storeReady = fetch("/api/tributes", { cache: "no-store" })
+  .then(r => (r.ok ? r.json() : Promise.reject(new Error("api " + r.status))))
+  .then(d => apiStore(d))
+  .catch(err => { console.info("Tributes API not reachable, saving on this device:", err.message); return localStore(); });
 
 function fmtDate(ms) { try { return new Date(ms).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return ""; } }
 
@@ -108,15 +115,17 @@ form.addEventListener("submit", async e => {
   submit.disabled = true; submit.textContent = "Posting…";
   try {
     const store = await storeReady;
-    newestId = await store.add({ name, relation, message });
+    const posted = await store.add({ name, relation, message });
+    newestId = posted.id;
     writeLocal("lastTributeAt", Date.now());
     form.reset(); $("#compose-chars").textContent = "0";
     closeCompose();
-    M().toast && M().toast(store.mode === "local" ? "Thank you. Your tribute is saved on this device." : "Thank you. Your tribute has been posted.");
+    M().toast && M().toast(store.mode === "local" ? "Thank you. Your tribute is saved on this device."
+      : posted.pending ? "Thank you. Your tribute will appear once the family has read it." : "Thank you. Your tribute has been posted.");
     setTimeout(() => { const c = list.firstElementChild; if (c) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, 300);
   } catch (e2) {
     console.error(e2);
-    showError("Sorry, your tribute could not be posted. Please check your internet connection and try again.");
+    showError(e2.userMessage || "Sorry, your tribute could not be posted. Please check your internet connection and try again.");
   } finally { submit.disabled = false; submit.textContent = "Post tribute"; }
 });
 
@@ -165,6 +174,9 @@ $$("[data-candle]").forEach(b => b.addEventListener("click", async () => {
 }));
 
 storeReady.then(store => {
+  if (store.mode === "sanity" && store.approval) {
+    $("#compose-note").textContent = "The family reads each tribute before it appears on this page.";
+  }
   if (store.mode === "local") {
     modeEl.hidden = false;
     modeEl.textContent = "Online tributes are not switched on yet, so messages written here are saved on this device only.";

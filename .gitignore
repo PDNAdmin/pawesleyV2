@@ -3,3 +3,16 @@
 
 # dependencies (film/node_modules alone is about 800 MB)
 node_modules/
+
+# working files: old versions, test screenshots, original photos
+_v1/
+_v2/
+_v3/
+scrollcraft/
+.scrollcraft.json
+Photos/
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/hook.cache.json
+film/out/
