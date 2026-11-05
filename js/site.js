@@ -241,12 +241,17 @@
   pToggle.addEventListener("click", function () { if (audio.paused) audio.play(); else audio.pause(); });
   $("#player-close").addEventListener("click", function () { audio.pause(); audio.removeAttribute("src"); audio.load(); current = null; player.hidden = true; syncButtons(); });
 
-  /* ------------------------------------------------ the hymn on arrival: "Sleep on, Beloved", looping softly
-     Browsers only allow sound after a tap, so the opening asks once; the switch at the top turns it on and off. */
-  var ambient = new Audio(AUDIO["sleep-on-beloved"].file), soundBtn = $("#sound-toggle"), soundWanted = false;
-  ambient.loop = true; ambient.preload = "metadata"; ambient.volume = 0.55;
+  /* ------------------------------------------------ the hymns that play by themselves
+     "Sleep on, Beloved" loops on the page; "In Christ Alone" plays with the film. When the film pauses or ends,
+     the page hymn comes back if it was on. Browsers only allow sound after a tap, so the opening asks once,
+     and the switch at the top turns whichever is playing on or off. */
+  function loopAudio(file, vol) { var a = new Audio(file); a.loop = true; a.preload = "metadata"; a.volume = vol; return a; }
+  var ambient = loopAudio(AUDIO["sleep-on-beloved"].file, 0.55), filmHymn = loopAudio(AUDIO["in-christ-alone"].file, 0.6);
+  var soundBtn = $("#sound-toggle"), soundWanted = false, filmOn = false, filmMuted = false;
+  function meta(title) { if ("mediaSession" in navigator && window.MediaMetadata) navigator.mediaSession.metadata = new MediaMetadata({ title: title, artist: "Forever In Our Heart", album: "Pa. Wesley Olajide Ojo Aiyegboka" }); }
+  function tryPlay(a) { var p = a.play(); if (p && p.catch) p.catch(syncSound); }
   function syncSound() {
-    var on = !ambient.paused;
+    var on = !ambient.paused || !filmHymn.paused;
     soundBtn.setAttribute("aria-pressed", String(on));
     soundBtn.setAttribute("aria-label", on ? "Turn the hymn off" : "Play the hymn");
     $(".tabs__sound-label", soundBtn).textContent = on ? "Sound on" : "Sound off";
@@ -254,15 +259,20 @@
   function soundOn() {
     soundWanted = true;
     if (!audio.paused) audio.pause();
-    var p = ambient.play(); if (p && p.catch) p.catch(function () { soundWanted = false; syncSound(); });
-    if ("mediaSession" in navigator && window.MediaMetadata) navigator.mediaSession.metadata = new MediaMetadata({ title: "Sleep on, Beloved", artist: "Forever In Our Heart", album: "Pa. Wesley Olajide Ojo Aiyegboka" });
+    if (filmOn) return;                      // the film's hymn has the floor; the page hymn waits for it
+    tryPlay(ambient); meta("Sleep on, Beloved");
   }
   function soundOff() { soundWanted = false; ambient.pause(); }
-  ambient.addEventListener("play", syncSound);
-  ambient.addEventListener("pause", syncSound);
-  soundBtn.addEventListener("click", function () { if (ambient.paused) soundOn(); else soundOff(); });
-  // another hymn or the film takes over; the arrival hymn steps aside
-  audio.addEventListener("play", function () { if (!ambient.paused) soundOff(); });
+  function filmHymnOn() { filmMuted = false; ambient.pause(); tryPlay(filmHymn); meta("In Christ Alone"); }
+  [ambient, filmHymn].forEach(function (a) { a.addEventListener("play", syncSound); a.addEventListener("pause", syncSound); });
+  soundBtn.addEventListener("click", function () {
+    var on = !ambient.paused || !filmHymn.paused;
+    if (on) { soundOff(); if (filmOn) filmMuted = true; filmHymn.pause(); }
+    else if (filmOn) filmHymnOn();
+    else soundOn();
+  });
+  // a hymn from the service player takes over from both
+  audio.addEventListener("play", function () { if (!ambient.paused) soundOff(); if (!filmHymn.paused) { filmMuted = true; filmHymn.pause(); } });
   syncSound();
 
   $$("[data-track]").forEach(function (holder) {
@@ -587,6 +597,7 @@
   }, { rootMargin: "1200px 0px" }).observe(filmFrame);
   function showControls() { filmFrame.classList.add("is-playing"); video.controls = true; filmLabel.textContent = "Play the film"; }
   function startFilm() {
+    if (!filmMuted) filmHymnOn();          // start the music inside the tap, so strict phones allow it
     filmLabel.textContent = "Starting the film\u2026";
     if (!video.getAttribute("src") || video.error) { video.src = filmSrc; video.load(); }
     var p;
@@ -601,9 +612,20 @@
     $("#film").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   });
   video.addEventListener("playing", showControls);
-  video.addEventListener("play", function () { if (!audio.paused) audio.pause(); if (!ambient.paused) soundOff(); });
+  video.addEventListener("play", function () {
+    filmOn = true;
+    if (!audio.paused) audio.pause();
+    if (!filmMuted) filmHymnOn(); else ambient.pause();
+  });
+  // paused or finished: the film's hymn stops and the page hymn carries on if it was playing before
+  function filmStopped() {
+    if (!filmOn) return;
+    filmOn = false; filmHymn.pause();
+    if (soundWanted && audio.paused) { tryPlay(ambient); meta("Sleep on, Beloved"); }
+  }
+  video.addEventListener("pause", filmStopped);
   video.addEventListener("error", showControls);
-  video.addEventListener("ended", function () { filmFrame.classList.remove("is-playing"); video.controls = false; video.currentTime = 0; });
+  video.addEventListener("ended", function () { filmStopped(); filmFrame.classList.remove("is-playing"); video.controls = false; video.currentTime = 0; });
 
   /* ------------------------------------------------ phones: one big button names where you are and opens every section */
   var HINTS = ["Date, church and officiants", "The running order", "Hymns, readings and prayers", "His life story",
