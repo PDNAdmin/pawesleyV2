@@ -27,11 +27,11 @@
     },
     {
       "source": "/studio",
-      "destination": "/studio-build/index.html"
+      "destination": "/studio-build"
     },
     {
       "source": "/studio/:path*",
-      "destination": "/studio-build/index.html"
+      "destination": "/studio-build"
     }
   ]
 }
