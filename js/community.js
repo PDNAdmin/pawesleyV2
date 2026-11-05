@@ -37,6 +37,7 @@ function apiStore(first) {
   return {
     mode: "sanity",
     approval: !!first.approval,
+    refresh: () => { emit(); return refresh(); },
     subscribe(cb) { subs.add(cb); emit(); },
     async add(t) {
       const r = await fetch("/api/tributes", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(t) });
@@ -50,43 +51,63 @@ function apiStore(first) {
   };
 }
 
-const storeReady = fetch("/api/tributes", { cache: "no-store" })
-  .then(r => (r.ok ? r.json() : Promise.reject(new Error("api " + r.status))))
-  .then(d => apiStore(d))
-  .catch(err => { console.info("Tributes API not reachable, saving on this device:", err.message); return localStore(); });
+const LOCAL_PREVIEW = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) || location.protocol === "file:";
+async function connect() {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const r = await fetch("/api/tributes", { cache: "no-store" });
+      if (r.ok) return apiStore(await r.json());
+    } catch (e) { /* network hiccup: try again */ }
+    await new Promise(res => setTimeout(res, 1200 * (attempt + 1)));
+  }
+  if (LOCAL_PREVIEW) { console.info("Local preview: tributes are kept in this browser."); return localStore(); }
+  return offlineStore();
+}
+// the live site never pretends to save: if the service cannot be reached, posting says so
+function offlineStore() {
+  return {
+    mode: "offline",
+    subscribe(cb) { cb([]); },
+    async add() { throw Object.assign(new Error("offline"), { userMessage: "Sorry, tributes cannot be posted right now. Please check your internet connection and try again in a moment." }); },
+    async candles() { return 0; },
+    async light() { throw new Error("offline"); }
+  };
+}
+const storeReady = connect();
 
 function fmtDate(ms) { try { return new Date(ms).toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return ""; } }
 
-/* ------------------------------------------------ guest tributes */
-const list = $("#guest-list"), countEl = $("#guest-count"), modeEl = $("#guest-mode");
-let guestItems = [], newestId = null;
+/* ------------------------------------------------ online tributes, in the same grid as the programme's */
+const grid = $("#tribute-list");
+const MINE = `myTributes:${ID}`;
+let newestId = null;
+const strip = id => String(id || "").replace(/^drafts\./, "");
 
-function render(items, mode) {
-  guestItems = items;
-  countEl.textContent = items.length ? `(${items.length})` : "";
-  list.replaceChildren();
-  if (!items.length) {
-    const empty = document.createElement("div");
-    empty.className = "guest__empty";
-    empty.innerHTML = "<strong>Be the first to share a memory of him.</strong><p>Tap “Write a tribute” to add yours.</p>";
-    list.append(empty);
-    return;
-  }
-  items.forEach((t, k) => {
-    const card = document.createElement("button");
-    card.type = "button";
-    card.className = "gcard" + (t.id === newestId ? " is-new" : "");
-    const meta = [t.relation, fmtDate(t.createdAt)].filter(Boolean).join(" · ");
-    card.innerHTML = '<span class="gcard__text"></span><span class="gcard__sign"><span class="gcard__name"></span><span class="gcard__meta"></span></span>';
-    $(".gcard__text", card).textContent = t.message;
-    $(".gcard__name", card).textContent = t.name;
-    $(".gcard__meta", card).textContent = meta + (mode === "local" ? " · saved on this device" : "");
-    card.setAttribute("aria-label", "Read the tribute from " + t.name);
-    card.addEventListener("click", () => M().openReader && M().openReader(guestItems.map(g => ({
-      title: "", body: g.message.split(/\n{2,}/), author: g.name, relation: [g.relation, fmtDate(g.createdAt)].filter(Boolean).join(" · ")
-    })), k, "Message"));
-    list.append(card);
+function render(items) {
+  // the writer sees their own tribute straight away, marked as waiting, until the family publishes it
+  const published = new Set(items.map(t => strip(t.id)));
+  const mine = readLocal(MINE, "[]").filter(t => !published.has(strip(t.id)));
+  writeLocal(MINE, mine);
+  const all = [...mine.map(t => ({ ...t, pending: true })), ...items];
+  $$(".tcard--online, .tdivider", grid).forEach(n => n.remove());
+  if (!all.length) { M().filterCards && M().filterCards(); return; }
+  const div = document.createElement("p");
+  div.className = "tdivider";
+  div.innerHTML = '<span>Written online</span><span class="tdivider__count"></span>';
+  $(".tdivider__count", div).textContent = all.length === 1 ? "1 tribute" : `${all.length} tributes`;
+  grid.append(div);
+  const forReader = all.map(g => ({ title: "", body: String(g.message).split(/\n{2,}/), author: g.name, relation: [g.relation, fmtDate(g.createdAt)].filter(Boolean).join(" · ") }));
+  all.forEach((t, k) => {
+    const card = M().buildCard({ author: t.name, relation: t.relation, title: "", body: [t.message] }, {
+      label: fmtDate(t.createdAt),
+      extraClass: "tcard--online" + (t.pending ? " is-pending" : "") + (strip(t.id) === strip(newestId) ? " is-new" : ""),
+      note: t.pending ? "Waiting for the family to approve it" : "",
+      onOpen: () => M().openReader(forReader, k, "Online tribute")
+    });
+    card.classList.add("is-in");
+    grid.append(card);
   });
+  M().filterCards && M().filterCards();
 }
 
 /* ------------------------------------------------ writing a tribute */
@@ -117,12 +138,16 @@ form.addEventListener("submit", async e => {
     const store = await storeReady;
     const posted = await store.add({ name, relation, message });
     newestId = posted.id;
+    if (posted.pending && posted.id) {
+      writeLocal(MINE, [{ id: posted.id, name, relation, message, createdAt: Date.now() }, ...readLocal(MINE, "[]")]);
+      store.refresh && store.refresh();
+    }
     writeLocal("lastTributeAt", Date.now());
     form.reset(); $("#compose-chars").textContent = "0";
     closeCompose();
     M().toast && M().toast(store.mode === "local" ? "Thank you. Your tribute is saved on this device."
       : posted.pending ? "Thank you. Your tribute will appear once the family has read it." : "Thank you. Your tribute has been posted.");
-    setTimeout(() => { const c = list.firstElementChild; if (c) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, 300);
+    setTimeout(() => { const c = $(".tcard--online", grid); if (c) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, 400);
   } catch (e2) {
     console.error(e2);
     showError(e2.userMessage || "Sorry, your tribute could not be posted. Please check your internet connection and try again.");
@@ -175,16 +200,10 @@ $$("[data-candle]").forEach(b => b.addEventListener("click", async () => {
 
 storeReady.then(store => {
   if (store.mode === "sanity" && store.approval) {
-    $("#compose-note").textContent = "The family reads each tribute before it appears on this page.";
+    $("#compose-note").textContent = "The family reads each tribute before it appears for everyone. You will see yours straight away, marked as waiting.";
+  } else if (store.mode === "local") {
+    $("#compose-note").textContent = "Local preview: your tribute is kept in this browser only.";
   }
-  if (store.mode === "local") {
-    modeEl.hidden = false;
-    modeEl.textContent = "Online tributes are not switched on yet, so messages written here are saved on this device only.";
-    $("#compose-note").textContent = "Online tributes are not switched on yet: your tribute will be saved on this device only.";
-  }
-  store.subscribe(items => render(items, store.mode), e => {
-    console.error(e);
-    list.replaceChildren(Object.assign(document.createElement("p"), { className: "guest__empty", textContent: "Messages could not be loaded right now. Please refresh the page." }));
-  });
+  store.subscribe(items => render(items), e => console.error(e));
   store.candles().then(setCandles).catch(() => setCandles(0));
 });

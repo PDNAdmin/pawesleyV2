@@ -376,38 +376,54 @@
     rx = null;
   }, { passive: true });
 
-  /* ------------------------------------------------ 19 to 36: tributes as cards, in the programme's order */
+  /* ------------------------------------------------ 19 to 36: tributes as cards, in the programme's order
+     Every card has the same parts: who wrote it, a heading, the opening lines, and the way in. */
   var tlist = $("#tribute-list");
-  var cards = TRIBUTES.map(function (t, k) {
-    var c = el("button", "tcard"); c.type = "button"; c.id = "tribute-" + (k + 1);
-    c.style.setProperty("--i", String(k % 6));
-    c.appendChild(el("span", "tcard__num", String(k + 1)));
-    if (t.title) c.appendChild(el("span", "tcard__title", t.title));
+  function initials(name) {
+    var w = String(name).replace(/^(Mr|Mrs|Ms|Dr|Chief|Hon|Revd|Rev|Ven|Pastor|Canon|Elder|Pa)\.?\s+/gi, "").split(/[\s&,/-]+/).filter(Boolean);
+    return ((w[0] || "?")[0] + (w.length > 1 ? w[w.length - 1][0] : "")).toUpperCase();
+  }
+  // opts: { label, onOpen, extraClass, note }
+  function buildCard(t, opts) {
+    var c = el("button", "tcard" + (opts.extraClass ? " " + opts.extraClass : "")); c.type = "button";
+    var head = el("span", "tcard__head");
+    head.appendChild(el("span", "tcard__avatar", initials(t.author)));
+    var who = el("span", "tcard__who");
+    who.appendChild(el("span", "tribute__name", t.author));
+    if (t.relation) who.appendChild(el("span", "tribute__rel", t.relation));
+    head.appendChild(who);
+    head.appendChild(el("span", "tcard__label", opts.label));
+    c.appendChild(head);
+    c.appendChild(el("span", "tcard__title", t.title || ("A tribute from " + t.author)));
     c.appendChild(el("span", "tcard__text", t.body.join(" ")));
-    var sign = el("span", "tcard__sign");
-    sign.appendChild(el("span", "tribute__name", t.author));
-    if (t.relation) sign.appendChild(el("span", "tribute__rel", t.relation));
-    c.appendChild(sign);
-    c.appendChild(el("span", "tcard__more", "Read the tribute"));
-    c.setAttribute("aria-label", "Tribute " + (k + 1) + " of " + TRIBUTES.length + ", from " + t.author + ". Read in full");
-    c.addEventListener("click", function () { openReader(TRIBUTES, k); });
+    var foot = el("span", "tcard__foot");
+    if (opts.note) foot.appendChild(el("span", "tcard__note", opts.note));
+    foot.appendChild(el("span", "tcard__more", "Read the tribute"));
+    c.appendChild(foot);
+    c.dataset.search = (t.author + " " + (t.relation || "") + " " + (t.title || "")).toLowerCase();
+    c.setAttribute("aria-label", (t.title || "A tribute from " + t.author) + ", from " + t.author + ". Read in full");
+    c.addEventListener("click", opts.onOpen);
+    return c;
+  }
+  var cards = TRIBUTES.map(function (t, k) {
+    var c = buildCard(t, { label: "No. " + (k + 1), onOpen: function () { openReader(TRIBUTES, k); } });
+    c.id = "tribute-" + (k + 1);
     tlist.appendChild(c);
     return c;
   });
   var search = $("#tribute-search"), none = $("#tribute-none");
-  search.addEventListener("input", function () {
+  function filterCards() {
     var q = search.value.trim().toLowerCase(), shown = 0;
-    cards.forEach(function (c, k) {
-      var t = TRIBUTES[k], hit = !q || (t.author + " " + (t.relation || "") + " " + (t.title || "")).toLowerCase().indexOf(q) >= 0;
-      c.hidden = !hit; if (hit) shown++;
-    });
+    $$(".tcard", tlist).forEach(function (c) { var hit = !q || c.dataset.search.indexOf(q) >= 0; c.hidden = !hit; if (hit) shown++; });
+    $$(".tdivider", tlist).forEach(function (d) { d.hidden = !!q; });
     none.hidden = shown > 0;
-  });
+  }
+  search.addEventListener("input", filterCards);
   // a shared link to one tribute opens it
   var m = /^#tribute-(\d+)$/.exec(location.hash);
   if (m && TRIBUTES[+m[1] - 1]) setTimeout(function () { cards[+m[1] - 1].scrollIntoView({ block: "center" }); openReader(TRIBUTES, +m[1] - 1); }, 400);
 
-  window.Memorial = { openReader: openReader, toast: toast };
+  window.Memorial = { openReader: openReader, toast: toast, buildCard: buildCard, filterCards: filterCards };
 
   /* ------------------------------------------------ 41 to 44: photo speak */
   var PORTRAIT = { 1: 1, 2: 1, 4: 1, 5: 1, 10: 1, 11: 1, 15: 1, 16: 1, 18: 1, 29: 1 };
