@@ -22,6 +22,10 @@
   ],
   "rewrites": [
     {
+      "source": "/studio/static/:path*",
+      "destination": "/studio-build/static/:path*"
+    },
+    {
       "source": "/static/:path*",
       "destination": "/studio-build/static/:path*"
     },
