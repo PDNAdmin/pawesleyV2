@@ -6,3 +6,4 @@ PRODUCT.md
 firestore.rules
 .gitignore
 sanity/
+serve.py

@@ -19,24 +19,42 @@
   var ICON_PAUSE = '<svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5h3v14H8zM13 5h3v14h-3z" fill="currentColor"/></svg>';
   var ICON_NOTE = '<svg class="order__note" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18.5a2.5 2.5 0 1 1-2-2.45V5l11-2v11.5a2.5 2.5 0 1 1-2-2.45V7.4l-7 1.27z" fill="currentColor"/></svg>';
 
-  /* ------------------------------------------------ the showreel */
+  /* ------------------------------------------------ the showreel
+     Plays by itself where the browser allows it. Where it does not (Low Power Mode, data saver,
+     "reduce motion"), the still photograph shows and the round button starts the film. */
   var reel = $("#hero-reel"), reelBtn = $("#reel-toggle");
   (function () {
     var phone = matchMedia("(max-aspect-ratio: 4/5)").matches;
     if (phone) reel.poster = reel.dataset.posterMobile;
-    if (reduce) { reelBtn.hidden = true; return; }
-    reel.src = phone ? reel.dataset.srcMobile : reel.dataset.src;
-    var p = reel.play(); if (p && p.catch) p.catch(function () {});
+    reel.muted = true; reel.defaultMuted = true; reel.playsInline = true;
+    var wanted = !reduce;   // reduce motion: wait for the visitor to ask
+    function setBtn(playing) {
+      reelBtn.setAttribute("aria-pressed", String(!playing));
+      reelBtn.setAttribute("aria-label", playing ? "Pause the background film" : "Play the background film");
+    }
+    function load() { if (!reel.getAttribute("src")) { reel.src = phone ? reel.dataset.srcMobile : reel.dataset.src; reel.load(); } }
+    function start() {
+      load();
+      var p = reel.play();
+      if (p && p.then) p.then(function () { setBtn(true); }, function () { setBtn(false); });
+      else setBtn(!reel.paused);
+    }
+    reel.addEventListener("playing", function () { setBtn(true); });
+    reel.addEventListener("pause", function () { setBtn(false); });
     reelBtn.addEventListener("click", function () {
-      var paused = reelBtn.getAttribute("aria-pressed") === "true";
-      if (paused) { reel.play(); reelBtn.setAttribute("aria-pressed", "false"); reelBtn.setAttribute("aria-label", "Pause the background film"); }
-      else { reel.pause(); reelBtn.setAttribute("aria-pressed", "true"); reelBtn.setAttribute("aria-label", "Play the background film"); }
+      if (reel.paused) { wanted = true; start(); } else { wanted = false; reel.pause(); }
     });
-    // stop decoding once the opening has scrolled away
+    if (wanted) {
+      start();
+      // a browser that refused autoplay usually allows it after the first touch or key press
+      var nudge = function () { if (wanted && reel.paused) start(); };
+      ["touchend", "click", "keydown"].forEach(function (t) { addEventListener(t, nudge, { once: true, passive: true }); });
+    } else setBtn(false);
+    // stop decoding once the opening has scrolled away, resume when it returns
     new IntersectionObserver(function (es) {
       es.forEach(function (e) {
-        if (reelBtn.getAttribute("aria-pressed") === "true") return;
-        if (e.isIntersecting) reel.play().catch(function () {}); else reel.pause();
+        if (!wanted) return;
+        if (e.isIntersecting) start(); else reel.pause();
       });
     }).observe($("#cover"));
   })();
