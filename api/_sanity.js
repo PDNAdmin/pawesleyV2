@@ -2,9 +2,11 @@
 const API = "v2024-01-01";
 
 function env() {
-  const projectId = process.env.SANITY_PROJECT_ID;
-  const dataset = process.env.SANITY_DATASET || "production";
-  const token = process.env.SANITY_WRITE_TOKEN;
+  // tolerate values pasted with spaces or quotes
+  const tidy = v => (v || "").trim().replace(/^["']|["']$/g, "");
+  const projectId = tidy(process.env.SANITY_PROJECT_ID);
+  const dataset = tidy(process.env.SANITY_DATASET) || "production";
+  const token = tidy(process.env.SANITY_WRITE_TOKEN);
   if (!projectId || !token) throw Object.assign(new Error("Sanity is not configured"), { status: 503 });
   return { projectId, dataset, token };
 }

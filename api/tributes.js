@@ -37,6 +37,6 @@ module.exports = async (req, res) => {
     return send(res, 405, { error: "Method not allowed" });
   } catch (e) {
     console.error(e);
-    return send(res, e.status || 500, { error: e.status === 503 ? "Tributes are not set up yet." : "Something went wrong. Please try again." });
+    return send(res, e.status || 500, { error: e.status === 503 ? "Tributes are not set up yet." : "Something went wrong. Please try again.", detail: String(e.message || e).slice(0, 300) });
   }
 };

@@ -1,9 +1,9 @@
-# Kept in the repo but never published: the site is index.html, css/, js/ and assets/.
-film/
-.impeccable/
-DESIGN.md
-PRODUCT.md
-firestore.rules
-.gitignore
-sanity/
-serve.py
+# Kept in the repo but never published: the site is index.html, css/, js/, assets/, versions/ and api/.
+# A leading slash matches only the top-level folder (a bare "film/" would also hide assets/film/).
+/film/
+/sanity/
+/.impeccable/
+/DESIGN.md
+/PRODUCT.md
+/serve.py
+/.gitignore

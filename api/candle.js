@@ -12,6 +12,6 @@ module.exports = async (req, res) => {
     return send(res, 200, { candles: n });
   } catch (e) {
     console.error(e);
-    return send(res, e.status || 500, { error: "Something went wrong. Please try again." });
+    return send(res, e.status || 500, { error: "Something went wrong. Please try again.", detail: String(e.message || e).slice(0, 300) });
   }
 };
