@@ -3,12 +3,31 @@
 const { query, mutate, send, MEMORIAL, CANDLES_ID } = require("./_sanity");
 
 const LIMITS = { name: 80, relation: 40, message: 3000 };
-const APPROVAL = process.env.REQUIRE_APPROVAL === "true";
+// Tributes appear for everyone as soon as they are written. The family can still remove one in Sanity Studio.
+const APPROVAL = false;
+
+// Tributes saved while approval was switched on are still drafts; publish them once so nobody's words stay hidden.
+// The setup test entry is removed rather than published.
+let draftsChecked = false;
+async function publishWaitingDrafts() {
+  if (draftsChecked) return;
+  const drafts = await query(`*[_type == "tribute" && memorial == $m && _id in path("drafts.**")]`, { m: MEMORIAL }, "raw");
+  const mutations = [];
+  for (const d of drafts || []) {
+    const id = d._id.replace(/^drafts\./, "");
+    if (/setup test/i.test(d.name + " " + d.message)) { mutations.push({ delete: { id: d._id } }); continue; }
+    const doc = { _id: id, _type: "tribute", memorial: d.memorial, name: d.name, relation: d.relation, message: d.message, createdAt: d.createdAt };
+    mutations.push({ createOrReplace: doc }, { delete: { id: d._id } });
+  }
+  if (mutations.length) await mutate(mutations);
+  draftsChecked = true;
+}
 const clean = (v, max) => String(v == null ? "" : v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, "").trim().slice(0, max);
 
 module.exports = async (req, res) => {
   try {
     if (req.method === "GET") {
+      try { await publishWaitingDrafts(); } catch (e) { console.error("publishing drafts failed", e); }
       const data = await query(
         `{"tributes": *[_type == "tribute" && memorial == $m] | order(createdAt desc)[0...500]{"id": _id, name, relation, message, createdAt},
           "candles": coalesce(*[_id == $c][0].count, 0)}`,
@@ -27,8 +46,6 @@ module.exports = async (req, res) => {
       if (message.length < 3) return send(res, 400, { error: "Please write a few words for your tribute." });
 
       const doc = { _type: "tribute", memorial: MEMORIAL, name, relation, message, createdAt: new Date().toISOString() };
-      // with approval on, the tribute is saved as a draft: it appears only after the family publishes it in Sanity Studio
-      if (APPROVAL) doc._id = "drafts.tribute-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
       const out = await mutate([{ create: doc }]);
       return send(res, 201, { id: out.results && out.results[0] && out.results[0].id, pending: APPROVAL });
     }

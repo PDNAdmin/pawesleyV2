@@ -11,9 +11,9 @@ function env() {
   return { projectId, dataset, token };
 }
 
-async function query(groq, params) {
+async function query(groq, params, perspective) {
   const { projectId, dataset, token } = env();
-  const qs = new URLSearchParams({ query: groq, perspective: "published" });
+  const qs = new URLSearchParams({ query: groq, perspective: perspective || "published" });
   for (const [k, v] of Object.entries(params || {})) qs.set("$" + k, JSON.stringify(v));
   const r = await fetch(`https://${projectId}.api.sanity.io/${API}/data/query/${dataset}?${qs}`, {
     headers: { Authorization: `Bearer ${token}` }
