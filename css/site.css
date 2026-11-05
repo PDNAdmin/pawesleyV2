@@ -196,6 +196,14 @@ html.text-lg { font-size: 115%; }
   .tabs__menu-text { display: flex; flex-direction: column; min-width: 0; flex: 1; line-height: 1.15; }
   .tabs__menu-kicker { font-size: .8125rem; font-weight: 700; color: var(--gold-ink); }
   .tabs__menu-name { font-size: 1.0625rem; font-weight: 800; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* a slow gold light passes over the name so it reads as something to tap */
+  .tabs__menu-name {
+    background: linear-gradient(100deg, var(--ink) 0 28%, var(--gold-ink) 40%, #c8902c 50%, var(--gold-ink) 60%, var(--ink) 72% 100%) 100% 0 / 280% 100%;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    animation: menu-shine 4.5s ease-in-out infinite;
+  }
+  @keyframes menu-shine { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0 0; } }
+  @media (prefers-reduced-motion: reduce) { .tabs__menu-name { animation: none; -webkit-text-fill-color: currentColor; background: none; } }
   .tabs__menu-icon { flex: none; width: 40px; height: 40px; border-radius: 10px; display: grid; place-items: center; background: var(--cinema); color: var(--gold-hi); }
   .tabs__menu-icon svg { width: 22px; height: 22px; }
   .tabs__sound { margin-left: 0; padding: 0; width: 48px; justify-content: center; }
