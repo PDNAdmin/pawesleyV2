@@ -364,8 +364,6 @@ body.lang-en .item--run .ihead__yo { display: none; }
   transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
 }
 .tcard[hidden] { display: none; }
-/* a gold hairline that warms along the top edge */
-.tcard::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, var(--gold), color-mix(in oklab, var(--gold) 20%, transparent)); }
 /* a quiet opening quote mark behind the words */
 .tcard::after {
   content: "\201C"; position: absolute; z-index: -1; right: .9rem; bottom: 2.6rem; font-family: var(--f-didone); font-weight: 700;
@@ -403,8 +401,7 @@ body.lang-en .item--run .ihead__yo { display: none; }
 .tcard:focus-visible { outline-offset: 4px; }
 /* written online, and waiting for the family */
 .tcard--online .tcard__avatar { background: var(--wine); color: #fff; }
-.tcard.is-pending { background: #FFFDF8; box-shadow: 0 0 0 1.5px color-mix(in oklab, var(--wine) 35%, transparent); }
-.tcard.is-pending::before { background: repeating-linear-gradient(90deg, var(--wine) 0 10px, transparent 10px 16px); }
+.tcard.is-pending { background: #FFFDF8; box-shadow: none; outline: 1.5px dashed color-mix(in oklab, var(--wine) 55%, transparent); outline-offset: -1.5px; }
 .tcard.is-new { animation: card-new 1.6s var(--ease); }
 @keyframes card-new { from { opacity: 0; transform: translateY(12px); box-shadow: 0 0 0 3px var(--gold); } 50% { opacity: 1; transform: none; box-shadow: 0 0 0 3px var(--gold); } }
 .tdivider { grid-column: 1 / -1; display: flex; align-items: center; gap: 1rem; margin: 1.6rem 0 .2rem; font-weight: 800; }
