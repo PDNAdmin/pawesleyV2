@@ -1,0 +1,12 @@
+{
+  "name": "memorial-studio",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": { "build": "sanity build ../studio-build -y", "dev": "sanity dev" },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "sanity": "^4.0.0",
+    "styled-components": "^6.1.0"
+  }
+}

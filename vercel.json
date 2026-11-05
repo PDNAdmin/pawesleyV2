@@ -19,5 +19,19 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/static/:path*",
+      "destination": "/studio-build/static/:path*"
+    },
+    {
+      "source": "/studio",
+      "destination": "/studio-build/index.html"
+    },
+    {
+      "source": "/studio/:path*",
+      "destination": "/studio-build/index.html"
+    }
   ]
 }
