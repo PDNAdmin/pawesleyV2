@@ -228,7 +228,7 @@ html.text-lg { font-size: 115%; }
 .sheet__top { display: flex; align-items: center; justify-content: center; min-height: 52px; margin-top: .6rem; font-weight: 800; color: var(--wine); }
 
 /* ============================================================ OPENING == */
-.loader { display: none; }
+.loader { display: none; background: var(--cinema); color: var(--on-cinema); }
 html.is-loading { overflow: hidden; }
 html.is-loading .loader, .loader.is-leaving {
   position: fixed; inset: 0; z-index: 200; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
@@ -244,7 +244,7 @@ html.is-loading .loader, .loader.is-leaving {
 @keyframes dawn { to { opacity: 1; } }
 .loader__kicker { margin-top: 1.4rem; font-family: var(--f-script); font-size: clamp(2rem, 8vw, 2.8rem); line-height: 1; color: var(--gold-hi); }
 .loader__name { margin-top: .6rem; font-family: var(--f-didone); font-weight: 700; font-size: clamp(1.5rem, 6vw, 2.2rem); line-height: 1.15; }
-.loader__name span { display: block; font-family: var(--f-text); font-weight: 800; text-transform: uppercase; font-size: .62em; letter-spacing: .04em; color: var(--on-cinema-soft); margin-top: .3rem; }
+.loader__name span { display: block; font-family: var(--f-text); font-weight: 800; text-transform: uppercase; font-size: clamp(.95rem, .8rem + 1.2vw, 1.35rem); letter-spacing: .04em; color: var(--on-cinema-soft); margin-top: .3rem; }
 .loader__dates { margin-top: .7rem; font-weight: 600; color: var(--on-cinema-soft); font-size: 1.0625rem; }
 .loader__kicker, .loader__name, .loader__dates { opacity: 0; animation: loader-word 900ms var(--ease) forwards; }
 .loader__kicker { animation-delay: .8s; } .loader__name { animation-delay: 1s; } .loader__dates { animation-delay: 1.2s; }
